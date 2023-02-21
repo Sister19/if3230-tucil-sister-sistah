@@ -52,8 +52,19 @@ int main(int argc, char *argv[]) {
         proc_domain.size = source_size;
     }
     
-    MPI_Bcast(&source, 64*64, MPI_DOUBLE, 0, MPI_COMM_WORLD);
-    MPI_Bcast(&proc_domain.size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&source_size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+    // broadcast the matrix data separately
+    if (rank != 0) {
+        source.size = source_size;
+    }
+    MPI_Bcast(&(source.size), 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(source.mat, source_size*source_size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
+    proc_domain.size = source_size;
+    
+    // MPI_Bcast(&source, 64*64, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    // MPI_Bcast(&proc_domain.size, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     int k_start = rank * source.size / num_procs;
     int k_end   = (rank + 1) * source.size / num_procs;
