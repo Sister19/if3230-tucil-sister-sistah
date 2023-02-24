@@ -4,7 +4,7 @@
 #include <math.h>
 #include <mpi.h>
 
-#define MAX_N 64
+#define MAX_N 512
 
 struct Matrix {
     int    size;
@@ -23,17 +23,50 @@ void readMatrix(struct Matrix *m) {
             scanf("%lf", &(m->mat[i][j]));
 }
 
-double complex dft(struct Matrix *mat, int k, int l) {
-    double complex element = 0.0;
-    for (int m = 0; m < mat->size; m++) {
-        for (int n = 0; n < mat->size; n++) {
-            double complex arg      = (k*m / (double) mat->size) + (l*n / (double) mat->size);
-            double complex exponent = cexp(-2.0I * M_PI * arg);
-            element += mat->mat[m][n] * exponent;
-        }
+void fft(double complex *input, double complex *output, int size, int step) {
+    if (size == 1) {
+        output[0] = input[0];
+        return;
     }
-    return element / (double) (mat->size*mat->size);
+
+    double complex even[size / 2], odd[size / 2];
+    fft(input, even, size / 2, step * 2);
+    fft(input + step, odd, size / 2, step * 2);
+
+    for (int i = 0; i < size / 2; i++) {
+        double complex arg = -2.0 * M_PI * i / (double) size;
+        double complex exponent = cexp(arg * I);
+        output[i] = even[i] + exponent * odd[i];
+        output[i + size / 2] = even[i] - exponent * odd[i];
+    }
 }
+
+double complex fft2d(struct Matrix *mat, int k, int l) {
+    double complex input[mat->size], output[mat->size];
+    for (int i = 0; i < mat->size; i++) {
+        input[i] = mat->mat[i][l];
+    }
+    fft(input, output, mat->size, 1);
+
+    double complex element = 0.0;
+    for (int i = 0; i < mat->size; i++) {
+        double complex arg = -2.0 * M_PI * k * i / (double) mat->size;
+        double complex exponent = cexp(arg * I);
+        element += output[i] * exponent;
+    }
+    return element / (double) mat->size;
+}
+// double complex dft(struct Matrix *mat, int k, int l) {
+//     double complex element = 0.0;
+//     for (int m = 0; m < mat->size; m++) {
+//         for (int n = 0; n < mat->size; n++) {
+//             double complex arg      = (k*m / (double) mat->size) + (l*n / (double) mat->size);
+//             double complex exponent = cexp(-2.0I * M_PI * arg);
+//             element += mat->mat[m][n] * exponent;
+//         }
+//     }
+//     return element / (double) (mat->size*mat->size);
+// }
 
 
 int main(int argc, char *argv[]) {
@@ -59,7 +92,7 @@ int main(int argc, char *argv[]) {
         source.size = source_size;
     }
     MPI_Bcast(&(source.size), 1, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Bcast(source.mat, source_size*source_size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    MPI_Bcast(source.mat, source_size*MAX_N, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
     proc_domain.size = source_size;
     
@@ -70,7 +103,7 @@ int main(int argc, char *argv[]) {
     int k_end   = (rank + 1) * source.size / num_procs;
     for (k = k_start; k < k_end; k++) {
         for (l = 0; l < source.size; l++) {
-            proc_domain.mat[k][l] = dft(&source, k, l);
+            proc_domain.mat[k][l] = fft2d(&source, k, l);
         }
     }
 
