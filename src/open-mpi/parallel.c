@@ -56,17 +56,17 @@ double complex fft2d(struct Matrix *mat, int k, int l) {
     }
     return element / (double) mat->size;
 }
-// double complex dft(struct Matrix *mat, int k, int l) {
-//     double complex element = 0.0;
-//     for (int m = 0; m < mat->size; m++) {
-//         for (int n = 0; n < mat->size; n++) {
-//             double complex arg      = (k*m / (double) mat->size) + (l*n / (double) mat->size);
-//             double complex exponent = cexp(-2.0I * M_PI * arg);
-//             element += mat->mat[m][n] * exponent;
-//         }
-//     }
-//     return element / (double) (mat->size*mat->size);
-// }
+double complex dft(struct Matrix *mat, int k, int l) {
+    double complex element = 0.0;
+    for (int m = 0; m < mat->size; m++) {
+        for (int n = 0; n < mat->size; n++) {
+            double complex arg      = (k*m / (double) mat->size) + (l*n / (double) mat->size);
+            double complex exponent = cexp(-2.0I * M_PI * arg);
+            element += mat->mat[m][n] * exponent;
+        }
+    }
+    return element / (double) (mat->size*mat->size);
+}
 
 
 int main(int argc, char *argv[]) {
@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
     int k_end   = (rank + 1) * source.size / num_procs;
     for (k = k_start; k < k_end; k++) {
         for (l = 0; l < source.size; l++) {
-            proc_domain.mat[k][l] = fft2d(&source, k, l);
+            proc_domain.mat[k][l] = dft(&source, k, l);
         }
     }
 
@@ -126,7 +126,7 @@ int main(int argc, char *argv[]) {
         printf("\n");
     }    
     if (rank == 0) {
-        printf("Average : (%lf, %lf)", creal(globalSum), cimag(globalSum));
+       printf("Average : (%lf, %lf)", creal(globalSum), cimag(globalSum));
     }
 
     MPI_Finalize();
