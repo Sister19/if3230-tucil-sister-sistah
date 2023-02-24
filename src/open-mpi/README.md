@@ -29,4 +29,6 @@ Program ini memanfaatkan library open MPI untuk memparalelisasi algortima DFT ya
 ## Screenshots
 
 **Dijalankan pada MacOS Ventura 13.2 M1 Chip**
+<img width="475" alt="Screenshot 2023-02-24 at 22 30 08" src="https://user-images.githubusercontent.com/69229629/221219737-9f709f97-26c1-4174-99d2-b1a9062cff5d.png">
+
 
