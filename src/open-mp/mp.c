@@ -1,8 +1,9 @@
+// gcc mp.c --openmp -o mp
 #include <complex.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define _USE_MATH_DEFINES
 #include <math.h>
+#include <omp.h>
 
 #define MAX_N 512
 
@@ -25,6 +26,7 @@ void readMatrix(struct Matrix *m) {
 
 double complex dft(struct Matrix *mat, int k, int l) {
     double complex element = 0.0;
+    #pragma omp parallel for reduction(+:element) num_threads(8)
     for (int m = 0; m < mat->size; m++) {
         for (int n = 0; n < mat->size; n++) {
             double complex arg      = (k*m / (double) mat->size) + (l*n / (double) mat->size);
@@ -37,16 +39,19 @@ double complex dft(struct Matrix *mat, int k, int l) {
 
 int main(void) {
     struct Matrix     source;
-    
     struct FreqMatrix freq_domain;
     readMatrix(&source);
     freq_domain.size = source.size;
-    
-    for (int k = 0; k < source.size; k++)
-        for (int l = 0; l < source.size; l++)
+
+    #pragma omp parallel for num_threads(8)
+    for (int k = 0; k < source.size; k++) {
+        for (int l = 0; l < source.size; l++) {
             freq_domain.mat[k][l] = dft(&source, k, l);
+        }
+    }
 
     double complex sum = 0.0;
+    #pragma omp parallel for reduction(+:sum) num_threads(8)
     for (int k = 0; k < source.size; k++) {
         for (int l = 0; l < source.size; l++) {
             double complex el = freq_domain.mat[k][l];
