@@ -1,0 +1,8 @@
+Hello world from from thread 3 out of 8 threads
+Hello world from from thread 5 out of 8 threads
+Hello world from from thread 2 out of 8 threads
+Hello world from from thread 4 out of 8 threads
+Hello world from from thread 1 out of 8 threads
+Hello world from from thread 0 out of 8 threads
+Hello world from from thread 7 out of 8 threads
+Hello world from from thread 6 out of 8 threads

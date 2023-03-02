@@ -19,9 +19,30 @@ struct FreqMatrix {
 
 void readMatrix(struct Matrix *m) {
     scanf("%d", &(m->size));
-    for (int i = 0; i < m->size; i++)
-        for (int j = 0; j < m->size; j++)
-            scanf("%lf", &(m->mat[i][j]));
+    int i, j, tid;
+    #pragma omp parallel private(i, j, tid) num_threads(8)
+    {
+        tid = omp_get_thread_num();
+        #pragma omp sections
+        {
+            #pragma omp section
+            {
+                for (i = 0; i < m->size/2; i++) {
+                    for (j = 0; j < m->size; j++) {
+                        scanf("%lf", &(m->mat[i][j]));
+                    }
+                }
+            }
+            #pragma omp section
+            {
+                for (i = m->size/2; i < m->size; i++) {
+                    for (j = 0; j < m->size; j++) {
+                        scanf("%lf", &(m->mat[i][j]));
+                    }
+                }
+            }
+        }
+    }
 }
 
 double complex dft(struct Matrix *mat, int k, int l) {
