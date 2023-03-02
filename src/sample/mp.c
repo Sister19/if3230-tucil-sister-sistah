@@ -1,3 +1,5 @@
+// gcc mp.c --openmp -o mp
+
 #include <omp.h>
 #include <stdio.h>
 #include <stdlib.h>
