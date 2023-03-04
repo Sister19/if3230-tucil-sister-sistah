@@ -12,7 +12,7 @@ Pada fungsi dft, terdapat sebuah blok #pragma omp parallel for yang menandakan b
 
 Pada fungsi main, terdapat dua loop for yang masing-masing diikuti oleh sebuah blok #pragma omp parallel for yang menandakan bahwa blok kode pada setiap iterasi loop akan dijalankan secara paralel. Selain itu, pada loop kedua juga terdapat perintah reduction(+:sum) yang berfungsi untuk menjumlahkan semua nilai pada variabel sum yang dihasilkan oleh setiap thread sehingga menghasilkan sebuah nilai tunggal yang akan disimpan pada variabel sum pada thread utama.
 
-Dengan memanfaatkan OpenMP, program tersebut dapat mempercepat waktu eksekusi karena setiap thread dapat menjalankan bagian-bagian kode yang independen secara paralel. Namun, perlu diingat bahwa penggunaan OpenMP harus dilakukan dengan hati-hati karena salah penggunaan dapat menyebabkan kesalahan atau bahkan menghasilkan hasil yang tidak konsisten.
+Dengan memanfaatkan OpenMP, program tersebut dapat mempercepat waktu eksekusi karena setiap thread dapat menjalankan bagian-bagian kode yang independen secara paralel.
 
 
 
@@ -33,13 +33,12 @@ Dengan memanfaatkan OpenMP, program tersebut dapat mempercepat waktu eksekusi ka
 ## Screenshots
 
 **Dijalankan pada Windows11 - WSL 2 Ubuntu 20.04 - Core i5-1035GP4 CPU @1.1GHz,1498 Mhz**
-
  TestCase             | Hasil Serial                                                      | Hasil Paralel | 
 | ----------------- | ------------------------------------------------------------------ | ------- |
-| 32.txt | <img width="475" alt="32 Serial" src=""> |<img width="702" alt="32 Open-Mp" src="https://drive.google.com/file/d/1oMxw9Z58TrAbQbG5rv-vLqLG7fRETb61/view?usp=share_link"> |
-| 64.txt | <img width="475" alt="64 Serial" src="https://drive.google.com/file/d/14N_JB7N07Gk2QW1e-eZKGA7J_QkYRX4L/view?usp=share_link"> |<img width="702" alt="64 Open-Mp" src="https://drive.google.com/file/d/1P9qPqXlFSKBg3Oi-DEYw0EDa0GidJmlr/view?usp=share_link"> |
-| 128.txt |  <img width="475" alt="128 Serial" src="https://drive.google.com/file/d/1w9pu3GC1nebD3VFQ3HTtHrRETbAxGlqp/view?usp=share_link"> |<img width="702" alt="128 Open-Mp" src="https://drive.google.com/file/d/1f1ab3EIYyjfPfUOq_nZ2Z_Pl_lLp-7S1/view?usp=share_link">|
-| 256.txt |  <img width="475" alt="256 Serial" src="https://drive.google.com/file/d/1z3SSjlHM3lctHeLxoxax--YIU-TGZbJW/view?usp=share_link"> |<img width="702" alt="256 Open-Mp" src="https://drive.google.com/file/d/1GU48lqKz4nU7kVwFE_Ft3554KcOZ4Hj2/view?usp=share_link">|
+| 32.txt | <img width="475" alt="32 Serial" src="https://user-images.githubusercontent.com/88304745/222873328-b555790a-1f95-494d-826d-b329760cd3c2.png"> |<img width="702" alt="32 Open-Mp" src="https://user-images.githubusercontent.com/88304745/222873310-326999fd-537d-444d-8a39-087adabaef45.png"> |
+| 64.txt | <img width="475" alt="64 Serial" src="https://user-images.githubusercontent.com/88304745/222873331-1e2243df-a8d7-453e-9df4-b56a50eb9afb.png"> |<img width="702" alt="64 Open-Mp" src="https://user-images.githubusercontent.com/88304745/222873329-ec6fc646-3e71-44f0-9687-822575877d08.png"> |
+| 128.txt |  <img width="475" alt="128 Serial" src="https://user-images.githubusercontent.com/88304745/222873334-ebb6f356-cec2-436d-93b6-53b7e107f93c.png"> |<img width="702" alt="128 Open-Mp" src="https://user-images.githubusercontent.com/88304745/222873333-ea393cd4-8383-4768-af03-0137e528a89c.png">|
+| 256.txt |  <img width="475" alt="256 Serial" src="https://user-images.githubusercontent.com/88304745/222873326-160ed087-2dc6-44e1-9bee-cf646d857723.png"> |<img width="702" alt="256 Open-Mp" src="https://user-images.githubusercontent.com/88304745/222873335-98936879-fac7-430a-ae90-c83f36f2b24e.png">|
 
 
 
