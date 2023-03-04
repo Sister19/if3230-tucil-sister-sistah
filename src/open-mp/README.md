@@ -36,7 +36,7 @@ Dengan memanfaatkan OpenMP, program tersebut dapat mempercepat waktu eksekusi ka
 
  TestCase             | Hasil Serial                                                      | Hasil Paralel | 
 | ----------------- | ------------------------------------------------------------------ | ------- |
-| 32.txt | <img width="475" alt="32 Serial" src="https://drive.google.com/file/d/14_ofip3mHGiZPXhPhzCrQozBIkBX9N-Q/view?usp=share_link"> |<img width="702" alt="32 Open-Mp" src="https://drive.google.com/file/d/1oMxw9Z58TrAbQbG5rv-vLqLG7fRETb61/view?usp=share_link"> |
+| 32.txt | <img width="475" alt="32 Serial" src=""> |<img width="702" alt="32 Open-Mp" src="https://drive.google.com/file/d/1oMxw9Z58TrAbQbG5rv-vLqLG7fRETb61/view?usp=share_link"> |
 | 64.txt | <img width="475" alt="64 Serial" src="https://drive.google.com/file/d/14N_JB7N07Gk2QW1e-eZKGA7J_QkYRX4L/view?usp=share_link"> |<img width="702" alt="64 Open-Mp" src="https://drive.google.com/file/d/1P9qPqXlFSKBg3Oi-DEYw0EDa0GidJmlr/view?usp=share_link"> |
 | 128.txt |  <img width="475" alt="128 Serial" src="https://drive.google.com/file/d/1w9pu3GC1nebD3VFQ3HTtHrRETbAxGlqp/view?usp=share_link"> |<img width="702" alt="128 Open-Mp" src="https://drive.google.com/file/d/1f1ab3EIYyjfPfUOq_nZ2Z_Pl_lLp-7S1/view?usp=share_link">|
 | 256.txt |  <img width="475" alt="256 Serial" src="https://drive.google.com/file/d/1z3SSjlHM3lctHeLxoxax--YIU-TGZbJW/view?usp=share_link"> |<img width="702" alt="256 Open-Mp" src="https://drive.google.com/file/d/1GU48lqKz4nU7kVwFE_Ft3554KcOZ4Hj2/view?usp=share_link">|

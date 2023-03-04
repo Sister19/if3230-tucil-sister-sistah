@@ -23,39 +23,39 @@ void readMatrix(struct Matrix *m) {
             scanf("%lf", &(m->mat[i][j]));
 }
 
-void fft(double complex *input, double complex *output, int size, int step) {
-    if (size == 1) {
-        output[0] = input[0];
-        return;
-    }
+// void fft(double complex *input, double complex *output, int size, int step) {
+//     if (size == 1) {
+//         output[0] = input[0];
+//         return;
+//     }
 
-    double complex even[size / 2], odd[size / 2];
-    fft(input, even, size / 2, step * 2);
-    fft(input + step, odd, size / 2, step * 2);
+//     double complex even[size / 2], odd[size / 2];
+//     fft(input, even, size / 2, step * 2);
+//     fft(input + step, odd, size / 2, step * 2);
 
-    for (int i = 0; i < size / 2; i++) {
-        double complex arg = -2.0 * M_PI * i / (double) size;
-        double complex exponent = cexp(arg * I);
-        output[i] = even[i] + exponent * odd[i];
-        output[i + size / 2] = even[i] - exponent * odd[i];
-    }
-}
+//     for (int i = 0; i < size / 2; i++) {
+//         double complex arg = -2.0 * M_PI * i / (double) size;
+//         double complex exponent = cexp(arg * I);
+//         output[i] = even[i] + exponent * odd[i];
+//         output[i + size / 2] = even[i] - exponent * odd[i];
+//     }
+// }
 
-double complex fft2d(struct Matrix *mat, int k, int l) {
-    double complex input[mat->size], output[mat->size];
-    for (int i = 0; i < mat->size; i++) {
-        input[i] = mat->mat[i][l];
-    }
-    fft(input, output, mat->size, 1);
+// double complex fft2d(struct Matrix *mat, int k, int l) {
+//     double complex input[mat->size], output[mat->size];
+//     for (int i = 0; i < mat->size; i++) {
+//         input[i] = mat->mat[i][l];
+//     }
+//     fft(input, output, mat->size, 1);
 
-    double complex element = 0.0;
-    for (int i = 0; i < mat->size; i++) {
-        double complex arg = -2.0 * M_PI * k * i / (double) mat->size;
-        double complex exponent = cexp(arg * I);
-        element += output[i] * exponent;
-    }
-    return element / (double) mat->size;
-}
+//     double complex element = 0.0;
+//     for (int i = 0; i < mat->size; i++) {
+//         double complex arg = -2.0 * M_PI * k * i / (double) mat->size;
+//         double complex exponent = cexp(arg * I);
+//         element += output[i] * exponent;
+//     }
+//     return element / (double) mat->size;
+// }
 double complex dft(struct Matrix *mat, int k, int l) {
     double complex element = 0.0;
     for (int m = 0; m < mat->size; m++) {
