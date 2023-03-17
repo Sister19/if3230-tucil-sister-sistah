@@ -28,14 +28,12 @@ Program ini memanfaatkan library open MPI untuk memparalelisasi algortima DFT ya
 
 ## Screenshots
 
-**Dijalankan pada MacOS Ventura 13.2 M1 Chip**
+
+**Dijalankan pada Windows11 - WSL 2 Ubuntu 20.04 - Core i5-1035GP4 CPU @1.1GHz,1498 Mhz**
 
  TestCase             | Hasil Serial                                                      | Hasil Paralel | 
 | ----------------- | ------------------------------------------------------------------ | ------- |
-| 64.txt | <img width="475" alt="Screenshot 2023-02-24 at 22 30 08" src="https://user-images.githubusercontent.com/69229629/221219737-9f709f97-26c1-4174-99d2-b1a9062cff5d.png"> |<img width="702" alt="Screenshot 2023-02-24 at 22 29 51" src="https://user-images.githubusercontent.com/69229629/221220271-d7484327-f223-44a6-8947-d019e89ed678.png"> |
-|  |  | |
-|  |  ||
-|  |  ||
-
-
-
+| 32.txt | <img width="475" alt="32 Serial" src="https://user-images.githubusercontent.com/88304745/222876667-ec2a664e-d3e3-461d-9c22-b8bb1c1eba34.png"> |<img width="702" alt="32 Open-MPI" src="https://user-images.githubusercontent.com/88304745/222876743-21424f84-d67a-40ac-9c21-1cc9459653ae.png"> |
+| 64.txt | <img width="475" alt="64 Serial" src="https://user-images.githubusercontent.com/88304745/222876747-48735b23-dba2-468c-af06-47b6eafd3a00.png"> |<img width="702" alt="64 Open-MPI" src="https://user-images.githubusercontent.com/88304745/222876751-45fa425e-8bd5-4442-815d-7e8714b25061.png"> |
+| 128.txt | <img width="475" alt="128 Serial" src="https://user-images.githubusercontent.com/88304745/222876756-28c3780a-35d5-413b-a9e9-7996b07fa4f5.png"> |<img width="702" alt="128 Open-MPI" src="https://user-images.githubusercontent.com/88304745/222876757-822afda4-3cab-4794-a7e1-5ec3a55ae235.png"> |
+| 256.txt | <img width="475" alt="256 Serial 2023-02-24 at 22 30 08" src="https://user-images.githubusercontent.com/88304745/222876773-94089e52-4fe2-46b7-a08a-bca898811d55.png"> |<img width="702" alt="256 Open-MPI" src="https://user-images.githubusercontent.com/88304745/222876780-3f69abb7-ee9b-4560-aa66-efd114f6c05c.png"> |
